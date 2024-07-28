@@ -1,0 +1,14 @@
+*.whl
+*.swp
+*.secrect
+.envrc
+.DS_Store
+.lein-failures
+.metals
+.ipynb_checkpoints
+.ruff_cache
+.mypy_cache
+ENV
+ENVS
+__pycache__
+out
