@@ -229,6 +229,7 @@ CREATE TABLE IF NOT EXISTS <project-name>.<dataset-name>.data_cap_balances
   , address          STRING     NOT NULL OPTIONS( description = 'Address of the actor whose balance was created or modified.' )
   , data_cap         STRING     NOT NULL OPTIONS( description = '(The origin data type is NUMERIC) Datacap of the actor with address after it was created or modified.' )
   , event            STRING     NOT NULL OPTIONS( description = 'Name of the event that occurred (ADDED, MODIFIED, REMOVED).' )
+  , address_type     STRING
   , PRIMARY KEY (height, state_root, address) NOT ENFORCED
 )
 PARTITION BY RANGE_BUCKET(height, GENERATE_ARRAY(0, 345513600, 86400))
