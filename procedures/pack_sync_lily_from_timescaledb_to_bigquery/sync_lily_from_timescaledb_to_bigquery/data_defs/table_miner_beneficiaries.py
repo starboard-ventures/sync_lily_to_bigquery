@@ -23,7 +23,7 @@ class TableMinerBeneficiaries(LilyTable):
                , t.used_quota::text    AS used_quota
                , t.expiration
                , t.new_beneficiary
-               , t.new_quota
+               , t.new_quota::text     AS new_quota
                , t.new_expiration
                , t.approved_by_beneficiary
                , t.approved_by_nominee

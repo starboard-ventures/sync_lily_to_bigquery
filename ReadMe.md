@@ -8,4 +8,9 @@
 
 表结构创建的 DDL 语句，记录在 `schema/lily_on_bigquery.sql` 文件中。
 
+## 同步程序
+
+代码在 `procedures/pack_sync_lily_from_timescaledb_to_bigquery/sync_lily_from_timescaledb_to_bigquery` 。
+
+每张 lily 表一个独立的同步过程，定义在 `sync_lily_from_timescaledb_to_bigquery/data_defs` 下。没有数据的表（即 lily software 不跑相应 task）或只有历史数据不再更新的表不同步。
 
