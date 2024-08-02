@@ -179,6 +179,23 @@ OPTIONS( description = 'Economic summaries per state root CID.' )
 ;
 
 
+DROP TABLE IF EXISTS <project-name>.<dataset-name>.chain_economics_v2 ;
+CREATE TABLE IF NOT EXISTS <project-name>.<dataset-name>.chain_economics_v2
+(
+    height                BIGINT     NOT NULL
+  , parent_state_root     STRING     NOT NULL
+  , circulating_fil_v2    STRING     NOT NULL OPTIONS( description = '(The origin data type is NUMERIC)' )
+  , vested_fil            STRING     NOT NULL OPTIONS( description = '(The origin data type is NUMERIC)' )
+  , mined_fil             STRING     NOT NULL OPTIONS( description = '(The origin data type is NUMERIC)' )
+  , burnt_fil             STRING     NOT NULL OPTIONS( description = '(The origin data type is NUMERIC)' )
+  , locked_fil_v2         STRING     NOT NULL OPTIONS( description = '(The origin data type is NUMERIC)' )
+  , fil_reserve_disbursed STRING     NOT NULL OPTIONS( description = '(The origin data type is NUMERIC)' )
+  , PRIMARY KEY (height, parent_state_root) NOT ENFORCED
+)
+PARTITION BY RANGE_BUCKET(height, GENERATE_ARRAY(0, 345513600, 86400))
+;
+
+
 DROP TABLE IF EXISTS <project-name>.<dataset-name>.chain_powers ;
 CREATE TABLE IF NOT EXISTS <project-name>.<dataset-name>.chain_powers
 (

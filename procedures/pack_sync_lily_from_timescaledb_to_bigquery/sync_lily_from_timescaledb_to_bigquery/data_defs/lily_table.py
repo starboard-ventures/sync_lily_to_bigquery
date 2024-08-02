@@ -91,6 +91,10 @@ class LilyTable(ABC):
 
         df_to_write = spark.createDataFrame(df_inc_data.rdd, target_schema)
 
+        if df_to_write.isEmpty():
+            logger.info(f"Source data is empty, no data to write to {self.bqy_table_name} !")
+            return None
+
         if self.bqy_table_if_overwrite :
             logger.info(f"Overwriting data to {self.bqy_table_name} on BigQuery | project_id = {bqy_project_id} , temp_gcs_bucket = {bqy_temp_gcs_bucket}")
             (df_to_write.write

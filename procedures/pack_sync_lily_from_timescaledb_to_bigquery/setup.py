@@ -31,6 +31,7 @@ setup (
             "builtin_actor_events = sync_lily_from_timescaledb_to_bigquery.main:proc_builtin_actor_events",
             "chain_consensus = sync_lily_from_timescaledb_to_bigquery.main:proc_chain_consensus",
             "chain_economics = sync_lily_from_timescaledb_to_bigquery.main:proc_chain_economics",
+            "chain_economics_v2 = sync_lily_from_timescaledb_to_bigquery.main:proc_chain_economics_v2",
             "chain_powers = sync_lily_from_timescaledb_to_bigquery.main:proc_chain_powers",
             "chain_rewards = sync_lily_from_timescaledb_to_bigquery.main:proc_chain_rewards",
             "data_cap_balances = sync_lily_from_timescaledb_to_bigquery.main:proc_data_cap_balances",

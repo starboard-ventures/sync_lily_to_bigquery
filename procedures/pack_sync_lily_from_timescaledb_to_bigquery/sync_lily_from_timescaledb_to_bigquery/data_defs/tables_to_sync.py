@@ -11,6 +11,7 @@ from sync_lily_from_timescaledb_to_bigquery.data_defs.table_block_parents import
 from sync_lily_from_timescaledb_to_bigquery.data_defs.table_builtin_actor_events import TableBuiltinActorEvents
 from sync_lily_from_timescaledb_to_bigquery.data_defs.table_chain_consensus import TableChainConsensus
 from sync_lily_from_timescaledb_to_bigquery.data_defs.table_chain_economics import TableChainEconomics
+from sync_lily_from_timescaledb_to_bigquery.data_defs.table_chain_economics_v2 import TableChainEconomicsV2
 from sync_lily_from_timescaledb_to_bigquery.data_defs.table_chain_powers import TableChainPowers
 from sync_lily_from_timescaledb_to_bigquery.data_defs.table_chain_rewards import TableChainRewards
 from sync_lily_from_timescaledb_to_bigquery.data_defs.table_data_cap_balances import TableDataCapBalances
@@ -72,6 +73,7 @@ LILY_TABLES = {
   "builtin_actor_events"               : TableBuiltinActorEvents ,
   "chain_consensus"                    : TableChainConsensus ,
   "chain_economics"                    : TableChainEconomics ,
+  "chain_economics_v2"                 : TableChainEconomicsV2 ,
   "chain_powers"                       : TableChainPowers ,
   "chain_rewards"                      : TableChainRewards ,
   "data_cap_balances"                  : TableDataCapBalances ,

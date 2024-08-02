@@ -100,6 +100,9 @@ def proc_chain_consensus():
 def proc_chain_economics():
     return simple_run("chain_economics")
 
+def proc_chain_economics_v2():
+    return simple_run("chain_economics_v2")
+
 def proc_chain_powers():
     return simple_run("chain_powers")
 

@@ -15,6 +15,7 @@ lily table list:
 - `builtin_actor_events`
 - `chain_consensus` (Not run)
 - `chain_economics`
+- `chain_economics_v2`
 - `chain_powers`
 - `chain_rewards`
 - `data_cap_balances`
