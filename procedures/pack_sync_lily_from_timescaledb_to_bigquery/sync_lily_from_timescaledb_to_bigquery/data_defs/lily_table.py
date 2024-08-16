@@ -2,6 +2,7 @@
 
 import logging
 import uuid
+import datetime
 from abc import ABC, abstractmethod
 
 from pyspark.sql import SparkSession
@@ -64,7 +65,16 @@ class LilyTable(ABC):
           )
         )
 
-        logger.info(f"Source data of {self.pg_table_name} from TimescaleDB fetched. Schema => {df_src_data.schema}")
+        logger.info(f"Source data of {self.pg_table_name} from TimescaleDB fetched.")
+
+        logger.info(f"   Schema => {df_src_data.schema}")
+        if "height" in df_src_data.columns:
+            max_height_of_source_data = df_src_data.agg({"height": "max"}).first()[0]
+            if max_height_of_source_data is not None:
+                unixepoch_of_max_height = max_height_of_source_data * 30 + 1598306400
+                timestamp_of_max_height = datetime.datetime.fromtimestamp(unixepoch_of_max_height, tz=datetime.timezone.utc)
+                logger.info(f"   Max value of height => {max_height_of_source_data} → {timestamp_of_max_height.isoformat()}")
+
         return df_src_data
 
 
