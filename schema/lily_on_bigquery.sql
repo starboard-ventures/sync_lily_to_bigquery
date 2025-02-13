@@ -885,6 +885,8 @@ CREATE TABLE IF NOT EXISTS <project-name>.<dataset-name>.miner_sector_infos_v7
   , expected_day_reward      STRING     NOT NULL OPTIONS( description = '(The origin data type is NUMERIC) Expected one day projection of reward for sector computed at activation time (in attoFIL).' )
   , expected_storage_pledge  STRING     NOT NULL OPTIONS( description = '(The origin data type is NUMERIC) Expected twenty day projection of reward for sector computed at activation time (in attoFIL).' )
   , sector_key_cid           STRING              OPTIONS( description = 'SealedSectorCID is set when CC sector is snapped.' )
+  , replaced_day_reward      STRING     NOT NULL OPTIONS( description = 'Day reward of this sector before its power was most recently updated (in attoFIL).' )
+  , power_base_epoch         BIGINT     NOT NULL OPTIONS( description = 'Epoch at which this sector’s power was most recently updated.' )
   , PRIMARY KEY (height, miner_id, sector_id, state_root) NOT ENFORCED
 )
 PARTITION BY RANGE_BUCKET(height, GENERATE_ARRAY(0, 345513600, 86400))
