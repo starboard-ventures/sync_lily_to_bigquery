@@ -39,6 +39,8 @@ class TableMinerActorDumps(LilyTable):
                , t.available_balance::text     AS available_balance
                , t.balance::text               AS balance
                , t.fee_debt::text              AS fee_debt
+               , t.termination_fee::text       AS termination_fee
+               , t.daily_fee::text             AS daily_fee
             FROM {self.pg_table_name} t
            WHERE t.height >= {height_start}
              AND t.height <  {height_end}
@@ -70,6 +72,8 @@ class TableMinerActorDumps(LilyTable):
           StructField("pre_commit_deposits", StringType(), True),
           StructField("available_balance", StringType(), True),
           StructField("balance", StringType(), True),
-          StructField("fee_debt", StringType(), True)
+          StructField("fee_debt", StringType(), True),
+          StructField("termination_fee", StringType(), True),
+          StructField("daily_fee", StringType(), True)
         ])
 

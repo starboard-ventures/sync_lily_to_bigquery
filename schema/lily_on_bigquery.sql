@@ -656,6 +656,8 @@ CREATE TABLE IF NOT EXISTS <project-name>.<dataset-name>.miner_actor_dumps
   , available_balance           STRING              OPTIONS( description = '(The origin data type is NUMERIC) balance - total_locked_funds.' )
   , balance                     STRING              OPTIONS( description = '(The origin data type is NUMERIC) Miner balance in attoFIL.' )
   , fee_debt                    STRING              OPTIONS( description = '(The origin data type is NUMERIC) Absolute value of debt this miner owes from unpaid fees in attoFIL.' )
+  , termination_fee             STRING     NOT NULL OPTIONS( description = '(The origin data type is NUMERIC) A penalty imposed when a sector is prematurely terminated in attoFIL.' )
+  , daily_fee                   STRING     NOT NULL OPTIONS( description = '(The origin data type is NUMERIC) Sum of daily fee payable of miner active sectors.' )
   , PRIMARY KEY (height, miner_id, miner_address) NOT ENFORCED
 )
 PARTITION BY RANGE_BUCKET(height, GENERATE_ARRAY(0, 345513600, 86400))
@@ -885,8 +887,9 @@ CREATE TABLE IF NOT EXISTS <project-name>.<dataset-name>.miner_sector_infos_v7
   , expected_day_reward      STRING     NOT NULL OPTIONS( description = '(The origin data type is NUMERIC) Expected one day projection of reward for sector computed at activation time (in attoFIL).' )
   , expected_storage_pledge  STRING     NOT NULL OPTIONS( description = '(The origin data type is NUMERIC) Expected twenty day projection of reward for sector computed at activation time (in attoFIL).' )
   , sector_key_cid           STRING              OPTIONS( description = 'SealedSectorCID is set when CC sector is snapped.' )
-  , replaced_day_reward      STRING     NOT NULL OPTIONS( description = 'Day reward of this sector before its power was most recently updated (in attoFIL).' )
-  , power_base_epoch         BIGINT     NOT NULL OPTIONS( description = 'Epoch at which this sector’s power was most recently updated.' )
+  , replaced_day_reward      STRING              OPTIONS( description = 'Day reward of this sector before its power was most recently updated (in attoFIL).' )
+  , power_base_epoch         BIGINT              OPTIONS( description = 'Epoch at which this sector’s power was most recently updated.' )
+  , daily_fee                STRING              OPTIONS( description = '(The origin data type is NUMERIC) The total fee payable per day for this sector.' )
   , PRIMARY KEY (height, miner_id, sector_id, state_root) NOT ENFORCED
 )
 PARTITION BY RANGE_BUCKET(height, GENERATE_ARRAY(0, 345513600, 86400))

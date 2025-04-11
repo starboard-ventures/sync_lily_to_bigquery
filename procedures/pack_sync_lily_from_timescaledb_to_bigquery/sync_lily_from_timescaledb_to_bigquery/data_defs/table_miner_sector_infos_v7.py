@@ -30,6 +30,7 @@ class TableMinerSectorInfosV7(LilyTable):
                , t.sector_key_cid
                , t.replaced_day_reward::text      AS replaced_day_reward
                , t.power_base_epoch               AS power_base_epoch
+               , t.daily_fee::text                AS daily_fee
             FROM {self.pg_table_name} t
            WHERE t.height >= {height_start}
              AND t.height <  {height_end}
@@ -52,6 +53,7 @@ class TableMinerSectorInfosV7(LilyTable):
           StructField("expected_storage_pledge", StringType(), False),
           StructField("sector_key_cid", StringType(), True),
           StructField("replaced_day_reward", StringType(), False),
-          StructField("power_base_epoch", LongType(), False)
+          StructField("power_base_epoch", LongType(), False),
+          StructField("daily_fee", StringType(), False)
         ])
 
