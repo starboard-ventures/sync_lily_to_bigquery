@@ -658,6 +658,7 @@ CREATE TABLE IF NOT EXISTS <project-name>.<dataset-name>.miner_actor_dumps
   , fee_debt                    STRING              OPTIONS( description = '(The origin data type is NUMERIC) Absolute value of debt this miner owes from unpaid fees in attoFIL.' )
   , termination_fee             STRING     NOT NULL OPTIONS( description = '(The origin data type is NUMERIC) A penalty imposed when a sector is prematurely terminated in attoFIL.' )
   , daily_fee                   STRING     NOT NULL OPTIONS( description = '(The origin data type is NUMERIC) Sum of daily fee payable of miner active sectors.' )
+  , termination_fee_v2          STRING     NOT NULL OPTIONS( description = '(The origin data type is NUMERIC) A penalty imposed when a sector is prematurely terminated in attoFIL (after nv25).' )
   , PRIMARY KEY (height, miner_id, miner_address) NOT ENFORCED
 )
 PARTITION BY RANGE_BUCKET(height, GENERATE_ARRAY(0, 345513600, 86400))
