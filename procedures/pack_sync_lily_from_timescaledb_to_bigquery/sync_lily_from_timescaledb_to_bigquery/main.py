@@ -176,6 +176,7 @@ def proc_messages():
 def proc_miner_actor_dumps():
     return simple_run("miner_actor_dumps")
 
+# Not run
 def proc_miner_beneficiaries():
     return simple_run("miner_beneficiaries")
 

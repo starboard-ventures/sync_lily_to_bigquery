@@ -701,41 +701,6 @@
       "webhook_notifications": {}
     },
     {
-      "task_key": "miner_beneficiaries",
-      "depends_on": [
-        {
-          "task_key": "sync_lily_bigquery_start"
-        }
-      ],
-      "run_if": "ALL_SUCCESS",
-      "python_wheel_task": {
-        "package_name": "sync_lily_from_timescaledb_to_bigquery",
-        "entry_point": "miner_beneficiaries"
-      },
-      "job_cluster_key": "sync_lily_bigquery_cluster",
-      "libraries": [
-        {
-          "whl": "s3://starboard-databricks-files/pipeline_dependence/wheel/sync_lily_from_timescaledb_to_bigquery-0.0.1-py3-none-any.whl"
-        },
-        {
-          "pypi": {
-            "package": "google-cloud-bigquery==3.25.0"
-          }
-        }
-      ],
-      "max_retries": 1,
-      "min_retry_interval_millis": 15000,
-      "retry_on_timeout": false,
-      "timeout_seconds": 3600,
-      "email_notifications": {},
-      "notification_settings": {
-        "no_alert_for_skipped_runs": false,
-        "no_alert_for_canceled_runs": false,
-        "alert_on_last_attempt": false
-      },
-      "webhook_notifications": {}
-    },
-    {
       "task_key": "miner_fee_debts",
       "depends_on": [
         {
@@ -1269,9 +1234,6 @@
           "task_key": "chain_economics_v2"
         },
         {
-          "task_key": "miner_beneficiaries"
-        },
-        {
           "task_key": "power_actor_claims"
         },
         {
@@ -1282,6 +1244,9 @@
         },
         {
           "task_key": "multisig_transactions"
+        },
+        {
+          "task_key": "sync_lily_bigquery_start"
         },
         {
           "task_key": "miner_infos"
@@ -1319,7 +1284,7 @@
       "job_cluster_key": "sync_lily_bigquery_cluster",
       "new_cluster": {
         "cluster_name": "",
-        "spark_version": "14.3.x-scala2.12",
+        "spark_version": "15.4.x-scala2.12",
         "spark_conf": {
           "spark.databricks.io.cache.enabled": "true",
           "spark.hadoop.fs.gs.auth.service.account.private.key.id": "{{secrets/databricks-ext-bigquery/bigquery_private_key_id}}",
@@ -1332,8 +1297,10 @@
           "spark.databricks.delta.optimizer.dynamicFilePruning": "true",
           "spark.databricks.delta.autoCompact.enabled": "true",
           "spark.network.timeout": "10000000",
+          "spark.sql.optimizer.dynamicPartitionPruning.enabled": "true",
           "spark.databricks.delta.properties.defaults.randomizeFilePrefixes": "true",
           "spark.hadoop.fs.gs.project.id": "lily-data",
+          "spark.sql.adaptive.coalescePartitions.enabled": "true",
           "spark.shuffle.checksum.algorithm": "ADLER32",
           "spark.sql.execution.arrow.pyspark.enabled": "true",
           "spark.hadoop.fs.gs.auth.service.account.email": "{{secrets/databricks-ext-bigquery/bigquery_client_email}}",
@@ -1344,22 +1311,18 @@
         },
         "aws_attributes": {
           "first_on_demand": 0,
-          "availability": "SPOT_WITH_FALLBACK",
+          "availability": "SPOT",
           "zone_id": "auto",
           "instance_profile_arn": "arn:aws:iam::234017874740:instance-profile/databricks-files",
           "spot_bid_price_percent": 100,
           "ebs_volume_count": 0
         },
         "node_type_id": "i3.xlarge",
-        "driver_node_type_id": "i3.2xlarge",
         "custom_tags": {
           "project": "lily",
           "user:product": "data-analysis",
           "user:product_service": "databricks-pl-lily-bigquery-data-analysis",
           "for": "lily-bigquery"
-        },
-        "spark_env_vars": {
-          "PYSPARK_PYTHON": "/databricks/python3/bin/python3"
         },
         "enable_elastic_disk": false,
         "data_security_mode": "LEGACY_SINGLE_USER_STANDARD",
@@ -1384,3 +1347,4 @@
     "user_name": "pxx@starboardventures.io"
   }
 }
+

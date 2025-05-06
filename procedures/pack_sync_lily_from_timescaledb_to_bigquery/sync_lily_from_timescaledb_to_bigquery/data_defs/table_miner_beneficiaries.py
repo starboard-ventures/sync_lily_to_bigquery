@@ -7,6 +7,7 @@ from sync_lily_from_timescaledb_to_bigquery.data_defs.lily_table import LilyTabl
 logger = logging.getLogger("sync_lily_from_timescaledb_to_bigquery")
 
 
+# 2025-05-06 Terry 确认该表不再产生新数据。
 class TableMinerBeneficiaries(LilyTable):
 
     def __init__(self, table_name: str, config: dict):

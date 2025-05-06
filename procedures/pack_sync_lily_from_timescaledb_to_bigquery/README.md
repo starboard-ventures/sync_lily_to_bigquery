@@ -37,7 +37,7 @@ lily table list:
 - `message_params` (Not run)
 - `messages`
 - `miner_actor_dumps` (Not run)
-- `miner_beneficiaries`
+- `miner_beneficiaries` (Not run)
 - `miner_current_deadline_infos` (Not run)
 - `miner_fee_debts`
 - `miner_infos`
