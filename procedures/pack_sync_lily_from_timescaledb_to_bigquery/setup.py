@@ -83,7 +83,7 @@ setup (
         "Development Status :: 5 - Production/Stable",
         "Environment :: Console",
         "Topic :: Utilities",
-        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Intended Audience :: Developers"
     ]
 )
