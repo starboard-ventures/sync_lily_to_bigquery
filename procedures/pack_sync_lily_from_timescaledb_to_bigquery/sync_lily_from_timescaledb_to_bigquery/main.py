@@ -26,16 +26,21 @@ def parse_binary_conf(conf_bin_data):
     return conf_loader
 
 
-def base_operations(lily_table_name: str):
-    logger.info(f"Table name: {lily_table_name}")
-
+def get_stat_date_from_args() -> str:
     args = sys.argv
     logger.info(f"Params: {sys.argv}")
     logger.info(f"Params length: {len(sys.argv)}")
 
     stat_date_str = args[1].strip()
+    logger.info(f"Got stat_date = {stat_date_str}")
+
+    return stat_date_str
+
+def base_operations(lily_table_name: str, stat_date_str: str):
+    logger.info(f"Table name: {lily_table_name}")
+
     stat_date = date.fromisoformat(stat_date_str)
-    logger.info(f"stat_date = {stat_date}")
+    logger.info(f"Use stat_date = {stat_date}")
 
     CONFIGFILE_DATA = pkgutil.get_data(__package__, "config.ini")
     config = parse_binary_conf(CONFIGFILE_DATA)
@@ -45,8 +50,15 @@ def base_operations(lily_table_name: str):
     return (spark, config, stat_date)
 
 
-def simple_run(table_name: str) -> None:
-    spark, config, stat_date = base_operations(table_name)
+def simple_run(table_name: str, is_manual: bool = False, in_stat_date_str: str = None) -> None:
+    if is_manual:
+        stat_date_str = in_stat_date_str
+        logger.warn(f"Manual mode: stat_date = {stat_date_str}")
+    else:
+        stat_date_str = get_stat_date_from_args()
+        logger.info(f"Daily mode: stat_date = {stat_date_str}")
+
+    spark, config, stat_date = base_operations(table_name, stat_date_str)
     sync_job_class = LILY_TABLES.get(table_name, None)
     if sync_job_class is None:
         logger.warn(f"Target table {table_name} not found !")
@@ -59,7 +71,8 @@ def simple_run(table_name: str) -> None:
 
 
 def proc_dummy():
-    _, _, _ = base_operations("dummy")
+    stat_date_str = get_stat_date_from_args()
+    _, _, _ = base_operations("dummy", stat_date_str)
     return None
 
 
