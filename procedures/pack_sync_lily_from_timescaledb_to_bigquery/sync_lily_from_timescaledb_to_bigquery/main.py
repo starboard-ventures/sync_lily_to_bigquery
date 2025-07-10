@@ -193,6 +193,9 @@ def proc_miner_actor_dumps():
 def proc_miner_beneficiaries():
     return simple_run("miner_beneficiaries")
 
+def proc_miner_cron_fees():
+    return simple_run("miner_cron_fees")
+
 # Not run
 def proc_miner_current_deadline_infos():
     return simple_run("miner_current_deadline_infos")

@@ -687,6 +687,21 @@ PARTITION BY RANGE_BUCKET(height, GENERATE_ARRAY(0, 345513600, 86400))
 ;
 
 
+DROP TABLE IF EXISTS <project-name>.<dataset-name>.miner_cron_fees ;
+CREATE TABLE IF NOT EXISTS <project-name>.<dataset-name>.miner_cron_fees
+(
+    height           BIGINT     NOT NULL OPTIONS( description = 'Height of the tipset where the cron event occurred.' )
+  , address          STRING     NOT NULL OPTIONS( description = 'Address of the miner that was involved in the cron event.' )
+  , burn             STRING     NOT NULL OPTIONS( description = '(The origin data type is NUMERIC) Amount of FIL burned during the cron event.' )
+  , fee              STRING     NOT NULL OPTIONS( description = '(The origin data type is NUMERIC) Amount of FIL charged as a fee during the cron event.' )
+  , penalty          STRING     NOT NULL OPTIONS( description = '(The origin data type is NUMERIC) Amount of FIL penalized during the cron event.' )
+  , PRIMARY KEY (height, address) NOT ENFORCED
+)
+PARTITION BY RANGE_BUCKET(height, GENERATE_ARRAY(0, 345513600, 86400))
+OPTIONS( description = 'Miner cron fees table, storing fees and penalties for miner cron events.' )
+;
+
+
 --! not run
 DROP TABLE IF EXISTS <project-name>.<dataset-name>.miner_current_deadline_infos ;
 CREATE TABLE IF NOT EXISTS <project-name>.<dataset-name>.miner_current_deadline_infos

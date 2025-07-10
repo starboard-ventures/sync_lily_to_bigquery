@@ -34,6 +34,7 @@ from sync_lily_from_timescaledb_to_bigquery.data_defs.table_message_params impor
 from sync_lily_from_timescaledb_to_bigquery.data_defs.table_messages import TableMessages
 from sync_lily_from_timescaledb_to_bigquery.data_defs.table_miner_actor_dumps import TableMinerActorDumps
 from sync_lily_from_timescaledb_to_bigquery.data_defs.table_miner_beneficiaries import TableMinerBeneficiaries
+from sync_lily_from_timescaledb_to_bigquery.data_defs.table_miner_cron_fees import TableMinerCronFees
 from sync_lily_from_timescaledb_to_bigquery.data_defs.table_miner_current_deadline_infos import TableMinerCurrentDeadlineInfos
 from sync_lily_from_timescaledb_to_bigquery.data_defs.table_miner_fee_debts import TableMinerFeeDebts
 from sync_lily_from_timescaledb_to_bigquery.data_defs.table_miner_infos import TableMinerInfos
@@ -96,6 +97,7 @@ LILY_TABLES = {
   "messages"                           : TableMessages ,
   "miner_actor_dumps"                  : TableMinerActorDumps ,
   "miner_beneficiaries"                : TableMinerBeneficiaries ,
+  "miner_cron_fees"                    : TableMinerCronFees ,
   "miner_current_deadline_infos"       : TableMinerCurrentDeadlineInfos ,
   "miner_fee_debts"                    : TableMinerFeeDebts ,
   "miner_infos"                        : TableMinerInfos ,

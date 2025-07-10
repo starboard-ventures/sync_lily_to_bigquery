@@ -54,6 +54,7 @@ setup (
             "messages = sync_lily_from_timescaledb_to_bigquery.main:proc_messages",
             "miner_actor_dumps = sync_lily_from_timescaledb_to_bigquery.main:proc_miner_actor_dumps",
             "miner_beneficiaries = sync_lily_from_timescaledb_to_bigquery.main:proc_miner_beneficiaries",
+            "miner_cron_fees = sync_lily_from_timescaledb_to_bigquery.main:proc_miner_cron_fees",
             "miner_current_deadline_infos = sync_lily_from_timescaledb_to_bigquery.main:proc_miner_current_deadline_infos",
             "miner_fee_debts = sync_lily_from_timescaledb_to_bigquery.main:proc_miner_fee_debts",
             "miner_infos = sync_lily_from_timescaledb_to_bigquery.main:proc_miner_infos",

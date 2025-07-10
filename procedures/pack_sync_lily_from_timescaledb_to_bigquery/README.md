@@ -44,6 +44,7 @@
 - :white_check_mark: `messages`
 - :heavy_multiplication_x: `miner_actor_dumps` (Not run)
 - :heavy_multiplication_x: `miner_beneficiaries` (Not run)
+- :white_check_mark: `miner_cron_fees`
 - :heavy_multiplication_x: `miner_current_deadline_infos` (Not run)
 - :white_check_mark: `miner_fee_debts`
 - :white_check_mark: `miner_infos`
