@@ -5,21 +5,22 @@ LINTCMD := $(VMROOT)/bin/ruff
 
 init:
 	@[ -d "$(VMROOT)" ] || { echo "You need to make a virtual environment named $(VMROOT) first!"; exit 1; }
-	@export all_proxy=
-	@export ALL_PROXY=
-	@test -d $(VMROOT) && $(PIPCMD) install -r requirements.txt
+	@test -d $(VMROOT) && $(PIPCMD) install -U build
+	@test -d $(VMROOT) && $(PIPCMD) install -U wheel
+	@test -d $(VMROOT) && $(PIPCMD) install .
 
 clean:
 	@find . -type f -name "*.whl" -delete || true
+	@test -d dist && rm -rf dist || true
 
 lint:
 	$(LINTCMD) check --ignore F403 --ignore F405
 
 wheel: lint
 	@test -f *.whl && rm *.whl || true
-	$(PYCMD) setup.py bdist_wheel
+	$(PYCMD) -m build
 	@mv dist/*.whl ./
 	@test -d build && rm -r build || true
 	@test -d dist && rm -r dist || true
-	@test -d *.egg-info && rm -r *.egg-info || true
+	@find . -type d -name "*.egg-info" -exec rm -r "{}" + || true
 

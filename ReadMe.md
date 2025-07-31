@@ -1,5 +1,7 @@
 # 同步 lily 源数据到 BigQuery
 
+PL 定制的 lily 在 BigQuery 上的数据公开
+
 ## 表结构
 
 所有的 lily 表结构，均创建到 BigQuery 上的 lily-data 项目下的 lily 这个 dataset 中。如果某张表有 height 字段，则按30天的高度范围分区。
