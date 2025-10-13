@@ -22,10 +22,11 @@ classifiers = [
 ]
 dependencies = [
   "ruff==0.11.9",
+  "pyrefly>=0.36.2",
   "pandas==2.2.3",
   "pyspark==3.5.5",
   "delta-spark==3.3.1",
-  "google-cloud-bigquery==3.32.0"
+  "google-cloud-bigquery==3.32.0",
 ]
 
 [project.scripts]
@@ -97,6 +98,14 @@ include-package-data = true
 
 [tool.setuptools.packages.find]
 include = ["sync_lily_from_timescaledb_to_bigquery*"]
+
+[tool.pyrefly]
+project-includes = ["**/*"]
+project-excludes = [
+    "**/node_modules",
+    "**/__pycache__",
+    "**/*venv/**/*",
+]
 
 [tool.setuptools.package-data]
 "*" = ["*.ini"]
