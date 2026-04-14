@@ -9,6 +9,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql import DataFrame as spkDataFrame
 from pyspark.sql.types import *
 from pyspark.sql.functions import *
+# pyrefly: ignore  # import-error
 from pyspark.dbutils import DBUtils
 
 logger = logging.getLogger("sync_lily_from_timescaledb_to_bigquery")
@@ -26,12 +27,13 @@ class LilyTable(ABC):
         self.bqy_table_if_overwrite = False
 
 
-    def get_height_range(self, spark: SparkSession, stat_date: str) -> (int, int):
+    def get_height_range(self, spark: SparkSession, stat_date: str) -> tuple[int, int]:
+        # pyrefly: ignore  # unsupported-operation
         height_end = spark.sql(f"""
           SELECT height_end
             FROM lakehouse.dim_stat_date_series
            WHERE stat_date = to_date('{stat_date}')
-        """).head()[0]
+        """).first()[0]
 
         height_start = height_end - 2880
 
@@ -69,6 +71,7 @@ class LilyTable(ABC):
 
         logger.info(f"   Schema => {df_src_data.schema}")
         if "height" in df_src_data.columns:
+            # pyrefly: ignore  # unsupported-operation
             max_height_of_source_data = df_src_data.agg({"height": "max"}).first()[0]
             if max_height_of_source_data is not None:
                 unixepoch_of_max_height = max_height_of_source_data * 30 + 1598306400

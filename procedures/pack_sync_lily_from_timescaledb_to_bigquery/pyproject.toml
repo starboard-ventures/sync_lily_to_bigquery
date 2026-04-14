@@ -21,12 +21,12 @@ classifiers = [
   "Environment :: Console"
 ]
 dependencies = [
-  "ruff==0.11.9",
-  "pyrefly>=0.36.2",
-  "pandas==2.2.3",
-  "pyspark==3.5.5",
-  "delta-spark==3.3.1",
-  "google-cloud-bigquery==3.32.0",
+  "ruff==0.14.6",
+  "pyrefly>=0.43.1",
+  "pandas==2.3.3",
+  "pyspark==4.0.0",
+  "delta-spark==4.0.0",
+  "google-cloud-bigquery==3.41.0"
 ]
 
 [project.scripts]

@@ -42,6 +42,8 @@ def base_operations(lily_table_name: str, stat_date_str: str):
     stat_date = date.fromisoformat(stat_date_str)
     logger.info(f"Use stat_date = {stat_date}")
 
+
+    # pyrefly: ignore  # bad-argument-type
     CONFIGFILE_DATA = pkgutil.get_data(__package__, "config.ini")
     config = parse_binary_conf(CONFIGFILE_DATA)
 
@@ -50,7 +52,7 @@ def base_operations(lily_table_name: str, stat_date_str: str):
     return (spark, config, stat_date)
 
 
-def simple_run(table_name: str, is_manual: bool = False, in_stat_date_str: str = None) -> None:
+def simple_run(table_name: str, is_manual: bool = False, in_stat_date_str: str = "") -> None:
     if is_manual:
         stat_date_str = in_stat_date_str
         logger.warn(f"Manual mode: stat_date = {stat_date_str}")
@@ -64,8 +66,9 @@ def simple_run(table_name: str, is_manual: bool = False, in_stat_date_str: str =
         logger.warn(f"Target table {table_name} not found !")
     else:
         logger.info(f"Run stat_date={stat_date} for {table_name}")
+        # pyrefly: ignore  # bad-argument-type
         sync_job = sync_job_class(table_name, config)
-        height_start, height_end = sync_job.get_height_range(spark, stat_date)
+        height_start, height_end = sync_job.get_height_range(spark, stat_date.isoformat())
         sync_job.process(spark, height_start, height_end)
     return None
 
