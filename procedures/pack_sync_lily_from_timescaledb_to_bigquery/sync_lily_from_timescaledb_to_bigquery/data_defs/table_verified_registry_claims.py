@@ -1,7 +1,8 @@
-# coding=utf-8
 
 import logging
+
 from pyspark.sql.types import *
+
 from sync_lily_from_timescaledb_to_bigquery.data_defs.lily_table import LilyTable
 
 logger = logging.getLogger("sync_lily_from_timescaledb_to_bigquery")
@@ -10,7 +11,7 @@ logger = logging.getLogger("sync_lily_from_timescaledb_to_bigquery")
 class TableVerifiedRegistryClaims(LilyTable):
 
     def __init__(self, table_name: str, config: dict):
-        super(TableVerifiedRegistryClaims, self).__init__(table_name, config)
+        super().__init__(table_name, config)
 
 
     def make_source_data_query(self, height_start: int, height_end: int) -> str:

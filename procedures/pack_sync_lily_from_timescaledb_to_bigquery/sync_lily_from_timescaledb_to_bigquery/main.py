@@ -1,15 +1,13 @@
-# coding=utf-8
-import sys
-import pkgutil
-import logging
-from datetime import date
 import configparser
 import io
+import logging
+import pkgutil
+import sys
+from datetime import date
 
 from pyspark.sql import SparkSession
 
 from sync_lily_from_timescaledb_to_bigquery.data_defs.tables_to_sync import LILY_TABLES
-
 
 logFormatter = logging.Formatter('%(asctime)s [%(levelname)s] (%(pathname)s:%(lineno)d@%(funcName)s) -> %(message)s')
 logger = logging.getLogger("sync_lily_from_timescaledb_to_bigquery")
@@ -55,7 +53,7 @@ def base_operations(lily_table_name: str, stat_date_str: str):
 def simple_run(table_name: str, is_manual: bool = False, in_stat_date_str: str = "") -> None:
     if is_manual:
         stat_date_str = in_stat_date_str
-        logger.warn(f"Manual mode: stat_date = {stat_date_str}")
+        logger.warning(f"Manual mode: stat_date = {stat_date_str}")
     else:
         stat_date_str = get_stat_date_from_args()
         logger.info(f"Daily mode: stat_date = {stat_date_str}")
@@ -63,20 +61,18 @@ def simple_run(table_name: str, is_manual: bool = False, in_stat_date_str: str =
     spark, config, stat_date = base_operations(table_name, stat_date_str)
     sync_job_class = LILY_TABLES.get(table_name, None)
     if sync_job_class is None:
-        logger.warn(f"Target table {table_name} not found !")
+        logger.warning(f"Target table {table_name} not found !")
     else:
         logger.info(f"Run stat_date={stat_date} for {table_name}")
         # pyrefly: ignore  # bad-argument-type
         sync_job = sync_job_class(table_name, config)
         height_start, height_end = sync_job.get_height_range(spark, stat_date.isoformat())
         sync_job.process(spark, height_start, height_end)
-    return None
 
 
-def proc_dummy():
+def proc_dummy() -> None:
     stat_date_str = get_stat_date_from_args()
     _, _, _ = base_operations("dummy", stat_date_str)
-    return None
 
 
 # Not run
@@ -124,6 +120,9 @@ def proc_chain_powers():
 
 def proc_chain_rewards():
     return simple_run("chain_rewards")
+
+def proc_chain_reward_streams():
+    return simple_run("chain_reward_streams")
 
 def proc_data_cap_balances():
     return simple_run("data_cap_balances")

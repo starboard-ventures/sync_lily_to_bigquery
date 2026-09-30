@@ -45,6 +45,7 @@ chain_economics = "sync_lily_from_timescaledb_to_bigquery.main:proc_chain_econom
 chain_economics_v2 = "sync_lily_from_timescaledb_to_bigquery.main:proc_chain_economics_v2"
 chain_powers = "sync_lily_from_timescaledb_to_bigquery.main:proc_chain_powers"
 chain_rewards = "sync_lily_from_timescaledb_to_bigquery.main:proc_chain_rewards"
+chain_reward_streams = "sync_lily_from_timescaledb_to_bigquery.main:proc_chain_reward_streams"
 data_cap_balances = "sync_lily_from_timescaledb_to_bigquery.main:proc_data_cap_balances"
 derived_gas_outputs = "sync_lily_from_timescaledb_to_bigquery.main:proc_derived_gas_outputs"
 drand_block_entries = "sync_lily_from_timescaledb_to_bigquery.main:proc_drand_block_entries"

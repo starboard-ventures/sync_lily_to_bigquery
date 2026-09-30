@@ -14,7 +14,10 @@ type-check:
 	$(UVCMD) tool run pyrefly check
 
 lint: type-check
-	$(UVCMD) tool run ruff check --ignore F403 --ignore F405
+	$(UVCMD) tool run ruff check \
+		--ignore F403 \
+		--ignore F405 \
+		--ignore UP009
 
 wheel: lint
 	@test -f *.whl && rm *.whl || true

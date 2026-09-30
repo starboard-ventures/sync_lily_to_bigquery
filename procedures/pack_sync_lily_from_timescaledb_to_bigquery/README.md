@@ -24,6 +24,7 @@
 - :white_check_mark: `chain_economics_v2`
 - :white_check_mark: `chain_powers`
 - :white_check_mark: `chain_rewards`
+- :white_check_mark: `chain_reward_streams`
 - :white_check_mark: `data_cap_balances`
 - :white_check_mark: `derived_gas_outputs`
 - :white_check_mark: `drand_block_entries`

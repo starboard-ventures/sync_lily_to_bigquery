@@ -1,16 +1,15 @@
-# coding=utf-8
 
+import datetime
 import logging
 import uuid
-import datetime
 from abc import ABC, abstractmethod
 
-from pyspark.sql import SparkSession
-from pyspark.sql import DataFrame as spkDataFrame
-from pyspark.sql.types import *
-from pyspark.sql.functions import *
 # pyrefly: ignore  # import-error
 from pyspark.dbutils import DBUtils
+from pyspark.sql import DataFrame as spkDataFrame
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import *
+from pyspark.sql.types import *
 
 logger = logging.getLogger("sync_lily_from_timescaledb_to_bigquery")
 
@@ -75,7 +74,7 @@ class LilyTable(ABC):
             max_height_of_source_data = df_src_data.agg({"height": "max"}).first()[0]
             if max_height_of_source_data is not None:
                 unixepoch_of_max_height = max_height_of_source_data * 30 + 1598306400
-                timestamp_of_max_height = datetime.datetime.fromtimestamp(unixepoch_of_max_height, tz=datetime.timezone.utc)
+                timestamp_of_max_height = datetime.datetime.fromtimestamp(unixepoch_of_max_height, tz=datetime.UTC)
                 logger.info(f"   Max value of height => {max_height_of_source_data} → {timestamp_of_max_height.isoformat()}")
 
         return df_src_data
@@ -106,7 +105,7 @@ class LilyTable(ABC):
 
         if df_to_write.isEmpty():
             logger.info(f"Source data is empty, no data to write to {self.bqy_table_name} !")
-            return None
+            return
 
         if self.bqy_table_if_overwrite :
             logger.info(f"Overwriting data to {self.bqy_table_name} on BigQuery | project_id = {bqy_project_id} , temp_gcs_bucket = {bqy_temp_gcs_bucket}")

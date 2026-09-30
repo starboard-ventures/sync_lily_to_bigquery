@@ -139,6 +139,20 @@ resources:
           max_retries: 1
           min_retry_interval_millis: 15000
           timeout_seconds: 3600
+        - task_key: chain_reward_streams
+          depends_on:
+            - task_key: sync_lily_bigquery_start
+          python_wheel_task:
+            package_name: sync_lily_from_timescaledb_to_bigquery
+            entry_point: chain_reward_streams
+          job_cluster_key: sync_lily_bigquery_cluster
+          libraries:
+            - whl: s3://starboard-databricks-files/pipeline_dependence/wheel/sync_lily_from_timescaledb_to_bigquery-0.0.1-py3-none-any.whl
+            - pypi:
+                package: google-cloud-bigquery==3.25.0
+          max_retries: 1
+          min_retry_interval_millis: 15000
+          timeout_seconds: 3600
         - task_key: chain_rewards
           depends_on:
             - task_key: sync_lily_bigquery_start
@@ -495,6 +509,7 @@ resources:
             - task_key: market_deal_proposals
             - task_key: miner_locked_funds
             - task_key: multisig_approvals
+            - task_key: chain_reward_streams
             - task_key: verified_registry_verifiers
             - task_key: actor_methods
             - task_key: data_cap_balances

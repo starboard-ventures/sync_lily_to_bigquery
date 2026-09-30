@@ -238,6 +238,34 @@ OPTIONS( description = 'Reward summaries from the Reward actor.' )
 ;
 
 
+DROP TABLE IF EXISTS <project-name>.<dataset-name>.chain_reward_streams ;
+CREATE TABLE IF NOT EXISTS <project-name>.<dataset-name>.chain_reward_streams
+(
+    height                   BIGINT     NOT NULL OPTIONS( description = 'Epoch this stream summary applies to.' )
+  , state_root               STRING     NOT NULL OPTIONS( description = 'CID of the parent state root.' )
+  , total_minted_reward      STRING     NOT NULL OPTIONS( description = 'Total FIL (attoFIL) minted through block rewards, across all streams.' )
+  , total_burn_minted        STRING     NOT NULL OPTIONS( description = 'Cumulative block-reward residual (attoFIL) sent to the burn actor.' )
+  , total_explicit_minted    STRING     NOT NULL OPTIONS( description = 'Cumulative block reward (attoFIL) accrued to explicit streams.' )
+  , burn_weight              STRING     NOT NULL OPTIONS( description = 'Burn stream weight w0 at this epoch, in DENOM fixed point. Residual over every live stream.' )
+  , consensus_weight         STRING     NOT NULL OPTIONS( description = 'Consensus stream weight w1 (stream id 1) at this epoch, in DENOM fixed point.' )
+  , service_weight           STRING     NOT NULL OPTIONS( description = 'Service stream weight w2 (stream id 2) at this epoch, in DENOM fixed point.' )
+  , consensus_v_start        STRING     NOT NULL OPTIONS( description = 'Consensus weight at consensus_t_start, in DENOM fixed point.' )
+  , consensus_slope          STRING     NOT NULL OPTIONS( description = 'Consensus weight change per epoch, in DENOM fixed point. Negative while the ramp declines.' )
+  , consensus_t_start        BIGINT     NOT NULL OPTIONS( description = 'Epoch at which consensus_v_start applies.' )
+  , consensus_floor          STRING     NOT NULL OPTIONS( description = 'Consensus weight lower clamp, in DENOM fixed point.' )
+  , consensus_cap            STRING     NOT NULL OPTIONS( description = 'Consensus weight upper clamp, in DENOM fixed point.' )
+  , service_v_start          STRING     NOT NULL OPTIONS( description = 'Service weight at service_t_start, in DENOM fixed point.' )
+  , service_slope            STRING     NOT NULL OPTIONS( description = 'Service weight change per epoch, in DENOM fixed point.' )
+  , service_t_start          BIGINT     NOT NULL OPTIONS( description = 'Epoch at which service_v_start applies.' )
+  , service_floor            STRING     NOT NULL OPTIONS( description = 'Service weight lower clamp, in DENOM fixed point.' )
+  , service_cap              STRING     NOT NULL OPTIONS( description = 'Service weight upper clamp, in DENOM fixed point.' )
+  , PRIMARY KEY (height, state_root) NOT ENFORCED
+)
+PARTITION BY RANGE_BUCKET(height, GENERATE_ARRAY(0, 345513600, 86400))
+OPTIONS( description = 'Per-epoch FIP-0118 block-reward stream weights and minted totals from the reward actor. Weights are DENOM (1e18) fixed-point integers.' )
+;
+
+
 DROP TABLE IF EXISTS <project-name>.<dataset-name>.data_cap_balances ;
 CREATE TABLE IF NOT EXISTS <project-name>.<dataset-name>.data_cap_balances
 (
