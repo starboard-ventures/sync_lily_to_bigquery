@@ -266,6 +266,19 @@ OPTIONS( description = 'Per-epoch FIP-0118 block-reward stream weights and minte
 ;
 
 
+DROP TABLE IF EXISTS <project-name>.<dataset-name>.chain_reward_distributions ;
+CREATE TABLE IF NOT EXISTS <project-name>.<dataset-name>.chain_reward_distributions
+(
+    height        BIGINT     NOT NULL OPTIONS( description = 'Epoch of the executed tipset.' )
+  , tipset_key    STRING     NOT NULL OPTIONS( description = 'Key of the executed tipset.' )
+  , distribution  STRING     NOT NULL OPTIONS( description = '(The origin data type is JSONB) Reward distribution as json: Totals plus per-block, per-stream and per-recipient amounts, weights and shares.' )
+  , PRIMARY KEY (height, tipset_key) NOT ENFORCED
+)
+PARTITION BY RANGE_BUCKET(height, GENERATE_ARRAY(0, 345513600, 86400))
+OPTIONS( description = 'FIP-0118 block reward distribution produced by executing a tipset, as returned by Lotus StateRewardDistribution. Amounts are attoFIL decimal strings; weights and shares use the denom in the JSON.' )
+;
+
+
 DROP TABLE IF EXISTS <project-name>.<dataset-name>.data_cap_balances ;
 CREATE TABLE IF NOT EXISTS <project-name>.<dataset-name>.data_cap_balances
 (

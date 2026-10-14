@@ -118,11 +118,14 @@ def proc_chain_economics_v2():
 def proc_chain_powers():
     return simple_run("chain_powers")
 
-def proc_chain_rewards():
-    return simple_run("chain_rewards")
+def proc_chain_reward_distributions():
+    return simple_run("chain_reward_distributions")
 
 def proc_chain_reward_streams():
     return simple_run("chain_reward_streams")
+
+def proc_chain_rewards():
+    return simple_run("chain_rewards")
 
 def proc_data_cap_balances():
     return simple_run("data_cap_balances")

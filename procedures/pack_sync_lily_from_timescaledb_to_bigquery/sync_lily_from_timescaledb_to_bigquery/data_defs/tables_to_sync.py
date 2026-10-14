@@ -36,6 +36,9 @@ from sync_lily_from_timescaledb_to_bigquery.data_defs.table_chain_economics_v2 i
 from sync_lily_from_timescaledb_to_bigquery.data_defs.table_chain_powers import (
   TableChainPowers,
 )
+from sync_lily_from_timescaledb_to_bigquery.data_defs.table_chain_reward_distributions import (
+  TableChainRewardDistributions,
+)
 from sync_lily_from_timescaledb_to_bigquery.data_defs.table_chain_reward_streams import (
   TableChainRewardStreams,
 )
@@ -195,6 +198,7 @@ LILY_TABLES = {
   "chain_economics"                    : TableChainEconomics ,
   "chain_economics_v2"                 : TableChainEconomicsV2 ,
   "chain_powers"                       : TableChainPowers ,
+  "chain_reward_distributions"         : TableChainRewardDistributions ,
   "chain_rewards"                      : TableChainRewards ,
   "chain_reward_streams"               : TableChainRewardStreams ,
   "data_cap_balances"                  : TableDataCapBalances ,
