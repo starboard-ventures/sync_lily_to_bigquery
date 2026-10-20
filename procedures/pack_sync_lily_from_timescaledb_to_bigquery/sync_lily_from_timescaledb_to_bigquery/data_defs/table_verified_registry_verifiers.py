@@ -8,6 +8,7 @@ from sync_lily_from_timescaledb_to_bigquery.data_defs.lily_table import LilyTabl
 logger = logging.getLogger("sync_lily_from_timescaledb_to_bigquery")
 
 
+# Deprecated 2026-10-19 因 FIP0118 停止更新数据
 class TableVerifiedRegistryVerifiers(LilyTable):
 
     def __init__(self, table_name: str, config: dict):

@@ -26,7 +26,7 @@
 - :white_check_mark: `chain_reward_distributions`
 - :white_check_mark: `chain_reward_streams`
 - :white_check_mark: `chain_rewards`
-- :white_check_mark: `data_cap_balances`
+- :black_circle: `data_cap_balances`
 - :white_check_mark: `derived_gas_outputs`
 - :white_check_mark: `drand_block_entries`
 - :heavy_multiplication_x: `fevm_actor_dumps` (Not run)
@@ -70,7 +70,7 @@
 - :heavy_multiplication_x: `unsynced_block_headers` (No need)
 - :heavy_multiplication_x: `verified_registry_claims` (Not run)
 - :black_circle: `verified_registry_verified_clients` (Not run any more)
-- :white_check_mark: `verified_registry_verifiers`
+- :black_circle: `verified_registry_verifiers`
 - :white_check_mark: `vm_messages`
 
 注意，除了 `message_gas_economy` 和 `power_actor_claims` 外的表，NUMERIC 类型的字段的数据类型，均改为了 STRING 类型。

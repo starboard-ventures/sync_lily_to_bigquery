@@ -127,6 +127,7 @@ def proc_chain_reward_streams():
 def proc_chain_rewards():
     return simple_run("chain_rewards")
 
+# Not run
 def proc_data_cap_balances():
     return simple_run("data_cap_balances")
 
@@ -275,9 +276,11 @@ def proc_unsynced_block_headers():
 def proc_verified_registry_claims():
     return simple_run("verified_registry_claims")
 
+# Not run
 def proc_verified_registry_verified_clients():
     return simple_run("verified_registry_verified_clients")
 
+# Not run
 def proc_verified_registry_verifiers():
     return simple_run("verified_registry_verifiers")
 
