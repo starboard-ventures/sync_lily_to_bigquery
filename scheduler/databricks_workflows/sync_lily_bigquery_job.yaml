@@ -186,7 +186,7 @@ resources:
             - task_key: sync_lily_bigquery_start
           python_wheel_task:
             package_name: sync_lily_from_timescaledb_to_bigquery
-            entry_point: data_cap_balances
+            entry_point: dummy
           job_cluster_key: sync_lily_bigquery_cluster
           libraries:
             - whl: s3://starboard-databricks-files/pipeline_dependence/wheel/sync_lily_from_timescaledb_to_bigquery-0.0.1-py3-none-any.whl
@@ -480,7 +480,7 @@ resources:
             - task_key: sync_lily_bigquery_start
           python_wheel_task:
             package_name: sync_lily_from_timescaledb_to_bigquery
-            entry_point: verified_registry_verifiers
+            entry_point: dummy
           job_cluster_key: sync_lily_bigquery_cluster
           libraries:
             - whl: s3://starboard-databricks-files/pipeline_dependence/wheel/sync_lily_from_timescaledb_to_bigquery-0.0.1-py3-none-any.whl
